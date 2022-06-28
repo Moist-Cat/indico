@@ -18,7 +18,7 @@ from dateutil.relativedelta import relativedelta
 from flask import flash, jsonify, redirect, request, session
 from pytz import utc
 from sqlalchemy.orm import joinedload, load_only, subqueryload, undefer, undefer_group
-from werkzeug.exceptions import BadRequest, NotFound
+from werkzeug.exceptions import BadRequest, NotFound, Forbidden
 
 from indico.core import signals
 from indico.core.db import db
@@ -226,11 +226,17 @@ class RHDisplayCategoryEventsBase(RHDisplayCategoryBase):
         self.now = now_utc(exact=False).astimezone(self.category.display_tzinfo)
         self.is_flat = request.args.get('flat') == '1' and self.category.is_flat_view_enabled
 
-
 class RHDisplayCategory(RHDisplayCategoryEventsBase):
     """Show the contents of a category (events/subcategories)"""
 
+    def _check_access(self):
+        if session.user is None:
+            raise Forbidden
+
     def _process(self):
+        if session.user is None:
+            return redirect(url_for_login())
+
         params = get_category_view_params(self.category, self.now, is_flat=self.is_flat)
         if not self.category.is_root:
             return WPCategory.render_template('display/category.html', self.category, **params)
