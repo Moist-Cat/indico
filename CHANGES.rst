@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Fork
+-----------
+
+- Make home menu only show meeting
+- Require auth for home
 
 Version 3.2
 -----------

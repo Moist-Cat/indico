@@ -230,6 +230,7 @@ class RHDisplayCategory(RHDisplayCategoryEventsBase):
     """Show the contents of a category (events/subcategories)"""
 
     def _check_access(self):
+        super()._check_access()
         if session.user is None:
             raise Forbidden
 
