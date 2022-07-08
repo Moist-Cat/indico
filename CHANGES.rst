@@ -6,6 +6,7 @@ Fork
 
 - Make home menu only show meeting
 - Require auth for home
+- Do not override the host with INDICO_CONF_OVERRIDE to avoid conflicts between the internal docker container IP and the server real IP
 
 Version 3.2
 -----------

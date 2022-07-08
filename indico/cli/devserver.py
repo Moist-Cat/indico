@@ -69,9 +69,9 @@ def run_server(info, host, port, url, ssl, ssl_key, ssl_cert, quiet, proxy, enab
 
     os.environ['INDICO_DEV_SERVER'] = '1'
     os.environ.pop('FLASK_DEBUG', None)
-    os.environ['INDICO_CONF_OVERRIDE'] = repr({
-        'BASE_URL': url,
-    })
+#    os.environ['INDICO_CONF_OVERRIDE'] = repr({
+#        'BASE_URL': url,
+#    })
 
     if os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
         print(f' * Serving Indico on {url}')
