@@ -9,7 +9,7 @@ from indico.core.settings import SettingsProxy
 
 
 core_settings = SettingsProxy('core', {
-    'site_title': 'Indico',
+    'site_title': 'Plataforma de Eventos virtuales',
     'site_organization': ''
 })
 
